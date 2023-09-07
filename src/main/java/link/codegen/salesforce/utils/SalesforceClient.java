@@ -120,10 +120,9 @@ public class SalesforceClient {
         List<Field> fields = Arrays.stream(clazz.getFields()).filter(field -> !field.getName().equals("attributes"))
                 .toList();
 
-        List<String> jsonFields = fields.stream()
+        return fields.stream()
+                .filter(field -> field.isAnnotationPresent(JsonProperty.class))
                 .map(field -> field.getAnnotation(JsonProperty.class).value())
-                .collect(Collectors.toList());
-
-        return jsonFields;
+                .toList();
     }
 }

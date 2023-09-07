@@ -1,6 +1,7 @@
 package link.codegen.salesforce;
 
 import link.codegen.salesforce.objects.Account;
+import link.codegen.salesforce.objects.TestObjectMM4__c;
 import link.codegen.salesforce.utils.SalesforceAuth;
 import link.codegen.salesforce.utils.SalesforceClient;
 import link.codegen.salesforce.utils.SfResponse;
@@ -19,13 +20,13 @@ import java.util.Objects;
 
 class LoadDataTests {
 
-    public LoadDataTests() throws IOException {
-    }
+    public LoadDataTests() throws IOException {}
 
     // real refreshToken is placed here when testing
     private final SalesforceAuth auth = new SalesforceAuth("testingRefreshToken");
     private final SalesforceClient client = new SalesforceClient(auth);
 
+    // Account tests
     @Test
     void LoadAllAccounts() throws IOException, URISyntaxException {
 
@@ -94,5 +95,14 @@ class LoadDataTests {
         LocalTime actualLocalTime = LocalTime.of(1, 1, 1);
 
         Assertions.assertEquals(expectedLocalTime, actualLocalTime);
+    }
+
+    // Custom object tests
+    @Test
+    void LoadAllCustomObject() throws IOException, URISyntaxException {
+
+        SfResponse<TestObjectMM4__c> response = client.getAll(TestObjectMM4__c.class);
+
+        Assertions.assertEquals(1, response.getTotalSize());
     }
 }

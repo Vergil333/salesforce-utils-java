@@ -2,7 +2,6 @@ package link.codegen.salesforce.objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import link.codegen.salesforce.utils.AbstractSObject;
-import link.codegen.salesforce.utils.SObjectType;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -431,6 +430,6 @@ public class Account extends AbstractSObject {
     }
 
    public Account() {
-        super(SObjectType.ACCOUNT);
+        super("Account");
     }
 }

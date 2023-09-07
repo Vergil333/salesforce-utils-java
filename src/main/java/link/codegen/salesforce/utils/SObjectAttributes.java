@@ -1,10 +1,11 @@
 package link.codegen.salesforce.utils;
 
-public class SObjectAttributes<T extends SObjectType> {
-public SObjectAttributes(T type, String url) {
-        this.type = type;
+public class SObjectAttributes {
+    public SObjectAttributes(String objectName, String url) {
+        this.type = objectName;
         this.url = url;
     }
-    T type;
+
+    String type;
     String url;
 }

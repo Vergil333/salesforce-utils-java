@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.ZonedDateTime;
@@ -63,7 +64,27 @@ public class SalesforceAuth {
         new DataOutputStream(connection.getOutputStream())
                 .writeBytes(mapper.writeValueAsString(requestBody));
 
-        return mapper.readValue(connection.getInputStream(), AuthResponse.class);
+        return parseResponse(connection);
+    }
+
+    private AuthResponse parseResponse(HttpURLConnection connection) throws IOException {
+        int responseCode = connection.getResponseCode();
+
+        if (200 <= responseCode && responseCode < 300) {
+            // Success
+            return mapper.readValue(connection.getInputStream(),  AuthResponse.class);
+        } else {
+            // Error
+            InputStream errorStream = connection.getErrorStream();
+            ErrorResponse errorResponse = mapper.readValue(errorStream, ErrorResponse.class);
+            String errorMessage = errorResponse.getMessage();
+
+            // Map error codes to a specific exception
+            switch (responseCode) {
+                case 400: throw new IllegalArgumentException(errorMessage);
+                default: throw new InternalError("Unexpected error occurred: " + errorMessage);
+            }
+        }
     }
 
     private Boolean isValid() {
