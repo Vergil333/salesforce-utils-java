@@ -28,7 +28,7 @@ class LoadDataTests {
 
     // Account tests
     @Test
-    void LoadAllAccounts() throws IOException, URISyntaxException {
+    void loadAllAccounts() throws IOException, URISyntaxException {
 
         SfResponse<Account> response = client.getAll(Account.class);
 
@@ -36,7 +36,7 @@ class LoadDataTests {
     }
 
     @Test
-    void LoadAllAccountNames() throws IOException, URISyntaxException {
+    void loadAllAccountNames() throws IOException, URISyntaxException {
         List<String> expectedAccountNames = List.of(
                 "University of Arizona",
                 "GenePoint",
@@ -60,7 +60,7 @@ class LoadDataTests {
     }
 
     @Test
-    void TestZonedDateTimeDeserialization() throws IOException, URISyntaxException {
+    void testZonedDateTimeDeserialization() throws IOException, URISyntaxException {
         ZonedDateTime expectedZonedDateTime = ZonedDateTime.of(2022, 11, 25, 8, 44, 48, 0, ZoneOffset.UTC);
 
         SfResponse<Account> response = client.getAll(Account.class);
@@ -73,7 +73,7 @@ class LoadDataTests {
     }
 
     @Test
-    void TestLocalDateDeserialization() throws IOException, URISyntaxException {
+    void testLocalDateDeserialization() throws IOException, URISyntaxException {
         LocalDate expectedLocalDate = LocalDate.of(2023, 6, 22);
 
         SfResponse<Account> response = client.getAll(Account.class);
@@ -87,7 +87,7 @@ class LoadDataTests {
 
     @Disabled("Account doesn't have Time field, so skip this one")
     @Test
-    void TestLocalTimeDeserialization() throws IOException, URISyntaxException {
+    void testLocalTimeDeserialization() throws IOException, URISyntaxException {
         LocalTime expectedLocalTime = LocalTime.of(1, 1, 1);
 
         SfResponse<Account> response = client.getAll(Account.class);
@@ -99,7 +99,7 @@ class LoadDataTests {
 
     // Custom object tests
     @Test
-    void LoadAllCustomObject() throws IOException, URISyntaxException {
+    void loadAllCustomObject() throws IOException, URISyntaxException {
 
         SfResponse<TestObjectMM4__c> response = client.getAll(TestObjectMM4__c.class);
 

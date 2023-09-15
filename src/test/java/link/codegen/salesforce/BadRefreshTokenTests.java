@@ -13,7 +13,7 @@ class BadRefreshTokenTests {
     }
 
     @Test
-    void DemoTokenReturnsSpecificMessage() {
+    void demoTokenReturnsSpecificMessage() {
         String refreshToken = "demoRefreshToken";
 
         IllegalArgumentException actualException = Assertions.assertThrows(
@@ -26,7 +26,7 @@ class BadRefreshTokenTests {
     }
 
     @Test
-    void InvalidTokenReturnsSpecificMessage() {
+    void invalidTokenReturnsSpecificMessage() {
         String refreshToken = "invalidRefreshToken";
 
         IllegalArgumentException actualException = Assertions.assertThrows(
@@ -39,8 +39,8 @@ class BadRefreshTokenTests {
     }
 
     @Test
-    void ValidToken() throws IOException {
-        String refreshToken = "put-testing-refresh-token-here";
+    void validToken() throws IOException {
+        String refreshToken = "5Aep861Dk98rQJC3mzij.DmJ_nyBy.CNZKLGPlhBJe7DQWZanhatvkca2zQMK8dzZlAuw473_dFKrHFmwlIjpcQ";
 
         SalesforceAuth auth = new SalesforceAuth(refreshToken);
 
