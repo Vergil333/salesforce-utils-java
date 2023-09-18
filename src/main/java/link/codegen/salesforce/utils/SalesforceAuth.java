@@ -14,6 +14,7 @@ public class SalesforceAuth {
 
     private String refreshToken = "yourRefreshToken";
 
+
     private String accessToken;
     public String getAccessToken() throws IOException {
         if (!isValid()) update();

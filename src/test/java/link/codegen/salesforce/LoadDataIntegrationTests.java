@@ -17,13 +17,14 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
-class LoadDataTests {
+class LoadDataIntegrationTests {
 
-    public LoadDataTests() throws IOException {}
+    public LoadDataIntegrationTests() throws IOException {}
 
     // real refreshToken is placed here when testing
-    private final SalesforceAuth auth = new SalesforceAuth("testingRefreshToken");
+    private final SalesforceAuth auth = new SalesforceAuth("real-testing-token");
     private final SalesforceClient client = new SalesforceClient(auth);
 
     // Account tests
@@ -37,7 +38,7 @@ class LoadDataTests {
 
     @Test
     void loadAllAccountNames() throws IOException, URISyntaxException {
-        List<String> expectedAccountNames = List.of(
+        List<String> expectedAccountNames = Stream.of(
                 "University of Arizona",
                 "GenePoint",
                 "United Oil & Gas, Singapore",
@@ -51,17 +52,17 @@ class LoadDataTests {
                 "Sample Account for Entitlements",
                 "United Oil & Gas, UK",
                 "Dickenson plc"
-        );
+        ).sorted().toList();
 
         SfResponse<Account> response = client.getAll(Account.class);
-        List<String> accountNames = response.getRecords().stream().map(Account::getName).toList();
+        List<String> accountNames = response.getRecords().stream().map(Account::getName).sorted().toList();
 
         Assertions.assertArrayEquals(expectedAccountNames.toArray(), accountNames.toArray());
     }
 
     @Test
     void testZonedDateTimeDeserialization() throws IOException, URISyntaxException {
-        ZonedDateTime expectedZonedDateTime = ZonedDateTime.of(2022, 11, 25, 8, 44, 48, 0, ZoneOffset.UTC);
+        ZonedDateTime expectedZonedDateTime = ZonedDateTime.of(2022, 2, 14, 11, 18, 50, 0, ZoneOffset.UTC);
 
         SfResponse<Account> response = client.getAll(Account.class);
         ZonedDateTime actualZonedDateTime = response.getRecords().stream()
@@ -74,7 +75,7 @@ class LoadDataTests {
 
     @Test
     void testLocalDateDeserialization() throws IOException, URISyntaxException {
-        LocalDate expectedLocalDate = LocalDate.of(2023, 6, 22);
+        LocalDate expectedLocalDate = LocalDate.of(2022, 9, 11);
 
         SfResponse<Account> response = client.getAll(Account.class);
         LocalDate actualLocalDate = response.getRecords().stream()

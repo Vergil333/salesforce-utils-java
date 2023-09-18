@@ -1,15 +1,14 @@
 package link.codegen.salesforce;
 
 import link.codegen.salesforce.utils.SalesforceAuth;
-import link.codegen.salesforce.utils.SalesforceClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-class BadRefreshTokenTests {
+class BadRefreshTokenIntegrationTests {
 
-    public BadRefreshTokenTests() {
+    public BadRefreshTokenIntegrationTests() {
     }
 
     @Test
@@ -40,7 +39,7 @@ class BadRefreshTokenTests {
 
     @Test
     void validToken() throws IOException {
-        String refreshToken = "5Aep861Dk98rQJC3mzij.DmJ_nyBy.CNZKLGPlhBJe7DQWZanhatvkca2zQMK8dzZlAuw473_dFKrHFmwlIjpcQ";
+        String refreshToken = "real-testing-token";
 
         SalesforceAuth auth = new SalesforceAuth(refreshToken);
 
