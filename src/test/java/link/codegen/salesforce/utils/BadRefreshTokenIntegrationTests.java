@@ -1,6 +1,5 @@
-package link.codegen.salesforce;
+package link.codegen.salesforce.utils;
 
-import link.codegen.salesforce.utils.SalesforceAuth;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

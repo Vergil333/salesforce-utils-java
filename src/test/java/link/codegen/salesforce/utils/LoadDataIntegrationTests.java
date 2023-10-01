@@ -1,10 +1,7 @@
-package link.codegen.salesforce;
+package link.codegen.salesforce.utils;
 
 import link.codegen.salesforce.objects.Account;
-import link.codegen.salesforce.objects.TestObjectMM4__c;
-import link.codegen.salesforce.utils.SalesforceAuth;
-import link.codegen.salesforce.utils.SalesforceClient;
-import link.codegen.salesforce.utils.SfResponse;
+import link.codegen.salesforce.objects.TestObject__c;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -102,7 +99,7 @@ class LoadDataIntegrationTests {
     @Test
     void loadAllCustomObject() throws IOException, URISyntaxException {
 
-        SfResponse<TestObjectMM4__c> response = client.getAll(TestObjectMM4__c.class);
+        SfResponse<TestObject__c> response = client.getAll(TestObject__c.class);
 
         Assertions.assertEquals(1, response.getTotalSize());
     }
